@@ -14,24 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group([
+Route::post('users', 'UsersController@store')->name('users.store');
 
+
+Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
-
 ], function ($router) {
-
     Route::post('login', 'AuthController@login')->name('login');
-
-
 });
 
-Route::middleware('jwt.verify')->group(function(){
+Route::middleware('jwt.verify')->group(function () {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
 
-    Route::resource('produtos','ProdutosController');
-    Route::resource('users','UsersController');
+    Route::resource('produtos', 'ProdutosController');
+    Route::resource('users', 'UsersController')->except(['store']);
 });
