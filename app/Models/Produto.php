@@ -10,4 +10,5 @@ class Produto extends Model
     use HasFactory;
 
     protected $fillable = ['nome','descricao','path_thumb','valor_unitario'];
+
 }

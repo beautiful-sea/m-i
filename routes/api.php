@@ -31,5 +31,6 @@ Route::middleware('jwt.verify')->group(function () {
 
 
     Route::resource('produtos', 'ProdutosController');
+    Route::resource('favoritos', 'FavoritosController');
     Route::resource('users', 'UsersController')->except(['store']);
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorito;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,10 @@ class ProdutosController extends Controller
             return response()->json($produtos->get());
         }
         $produtos = Produto::all();
+
+        $produtos->map(function($produto){
+            $produto->is_favorito = (Favorito::where('produto_id',$produto->id)->first())?true:false;
+        });
         return response()->json($produtos);
     }
 
